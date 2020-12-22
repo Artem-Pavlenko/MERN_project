@@ -16,6 +16,7 @@ router.post(
     ],
     async (req, res) => {
         try {
+
             // check будет проверять входящие данные и результат будет в validationResult.
             const errors = validationResult(req)
             // проверка на наличие ошибок
