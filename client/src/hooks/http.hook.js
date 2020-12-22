@@ -12,8 +12,10 @@ export const useHttp = () => {
                 headers['Content-Type'] = 'application/json'
             }
             const response = await fetch(url, {method, body, headers})
-            const data = response.json()
+            const data = await response.json()
             if (!response.ok) {
+                console.log('data:', data)
+                console.log(data.message)
                 throw new Error(data.message || 'Something\'s wrongs')
             }
 
@@ -23,12 +25,13 @@ export const useHttp = () => {
 
         } catch (e) {
             setLoading(false)
+            console.log(e.message)
             setError(e.message)
             throw e
         }
     }, [])
 
-    const clearError = () => setError(null)
+    const clearError = useCallback(() => setError(null),[])
 
     return {loading, request, error, clearError}
 }
