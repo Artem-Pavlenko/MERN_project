@@ -3,9 +3,9 @@ const config = require('config')
 const shortid = require('shortid')
 const Link = require('../models/Link')
 const auth = require('../middleware/auth.middleware')
-
 const router = Router()
 
+// /api/link/generate
 router.post('/generate', auth, async (req, res) => {
     try {
         const baseUrl = config.get('baseUrl')
@@ -48,4 +48,4 @@ router.get('/:id', auth, async (req, res) => {
     }
 })
 
-module.exportrs = router
+module.exports = router
