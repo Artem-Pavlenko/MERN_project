@@ -15,12 +15,9 @@ export const useHttp = () => {
             const data = await response.json()
             if (!response.ok) {
                 console.log('(http.hook.js)data:', data)
-                // console.log(data.message)
                 throw new Error(data.message || 'Something\'s wrongs')
             }
-
             setLoading(false)
-
             return data
 
         } catch (e) {
@@ -30,7 +27,6 @@ export const useHttp = () => {
             throw e
         }
     }, [])
-
     const clearError = useCallback(() => setError(null), [])
 
     return {loading, request, error, clearError}

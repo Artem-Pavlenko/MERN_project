@@ -15,7 +15,7 @@ export const CreatePage = () => {
                 const data = await request('/api/link/generate', 'POST', {from: link}, {
                     Authorization: `Bearer ${auth.token}`
                 })
-                console.log(data)
+                console.log('CreatePage, /api/link/generate', data)
                 history.push(`/detail/${data.link._id}`)
             } catch (e) {}
         }
@@ -26,7 +26,7 @@ export const CreatePage = () => {
     }, [])
 
     return (
-        <div className='row'>
+        <div className='row' style={{padding: '2rem'}}>
             <div className="col s8 offset-s2" >
                 <div className="input-field">
                     <input
