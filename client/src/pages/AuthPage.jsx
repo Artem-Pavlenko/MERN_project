@@ -4,6 +4,7 @@ import {useMessage} from "../hooks/message.hook";
 import {AuthContext} from "../context/AuthContext";
 
 export const AuthPage = () => {
+
     const auth = useContext(AuthContext)
     const {loading, request, error, clearError} = useHttp()
     const message = useMessage()
@@ -27,7 +28,7 @@ export const AuthPage = () => {
     const registerHandler = async () => {
         try {
             const data = await request('/api/auth/register', 'POST', {...form})
-            console.log('data', data)
+            console.log('(AuthPage)data', data)
         } catch (e) {
         }
     }
@@ -57,6 +58,7 @@ export const AuthPage = () => {
                                     name="email"
                                     className="yellow-input"
                                     onChange={changeHandler}
+                                    value={form.email}
                                 />
                                 <label htmlFor="email">Email</label>
                             </div>
@@ -69,6 +71,7 @@ export const AuthPage = () => {
                                     name="password"
                                     className="yellow-input"
                                     onChange={changeHandler}
+                                    value={form.password}
                                 />
                                 <label htmlFor="pass">Пароль</label>
                             </div>

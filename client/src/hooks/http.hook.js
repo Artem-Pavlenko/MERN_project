@@ -14,8 +14,8 @@ export const useHttp = () => {
             const response = await fetch(url, {method, body, headers})
             const data = await response.json()
             if (!response.ok) {
-                console.log('data:', data)
-                console.log(data.message)
+                console.log('(http.hook.js)data:', data)
+                // console.log(data.message)
                 throw new Error(data.message || 'Something\'s wrongs')
             }
 
@@ -25,13 +25,13 @@ export const useHttp = () => {
 
         } catch (e) {
             setLoading(false)
-            console.log(e.message)
+            console.log('(http.hook.js in catch)', e.message)
             setError(e.message)
             throw e
         }
     }, [])
 
-    const clearError = useCallback(() => setError(null),[])
+    const clearError = useCallback(() => setError(null), [])
 
     return {loading, request, error, clearError}
 }
