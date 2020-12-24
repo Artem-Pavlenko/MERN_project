@@ -1,5 +1,6 @@
 const express = require('express')
 const config = require('config')
+const path = require('path')
 const mongoose = require('mongoose')
 
 const app = express()
@@ -9,6 +10,18 @@ app.use(express.json({extended: true}))
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/link', require('./routes/links.routes'))
 app.use('/t', require('./routes/redirect.routes'))
+
+// для того чтобы работал фронт (запускался с сервака) и бэк одновремённо
+if (process.env.NODE_ENV === 'production') {
+    // добавление middleware чтобы указать статическую папку
+    app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+    // __dirname - текущая дериктория
+    // '*' - любой get запрос
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
+
 
 const PORT = config.get('port') || 5000
 
